@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STROKE-ME</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/styles.css') }}">
+    <link rel="icon" href="static\removed-background.png" type="image/png">
+
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="header_text">STROKE-ME</h1>
+        <p class="header_lower_text">Reliable Stroke Forecasting for Better Health</p>
+        <ul class="navigation">
+            <li><a href="{{ url_for('homee') }}">Home</a></li>
+            <li><a href="https://www.calculator.net/bmi-calculator.html">KnowYourBMI</a></li>
+            <li><a href="https://health.economictimes.indiatimes.com/news?utm_source=main_menu_dropdown&utm_medium=newsDetail">News</a></li>
+            <li><a href="contact.asp">Contact</a></li>
+            <li><a href="about.asp">About</a></li>
+        </ul>
+    </header>
+    <div class="image">
+        <img src="static\MainVisuals.jpg" alt="Main Visual Cyan Website">
+        <div class="form-container">
+            <form action="/predict" method="POST">
+                <h2 class="detail_text">Enter Your Details</h2>
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" placeholder="e.g., 45" required>
+
+                <label for="hypertension">Hypertension:</label>
+                <select id="hypertension" name="hypertension" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+
+                <label for="heart_disease">Heart Disease:</label>
+                <select id="heart_disease" name="heart_disease" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+
+                <label for="avg_glucose_level">Average Glucose Level:</label>
+                <input type="number" step="0.01" id="avg_glucose_level" name="avg_glucose_level" placeholder="e.g., 95.6" required>
+
+                <label for="bmi">BMI:</label>
+                <input type="number" step="0.1" id="bmi" name="bmi" placeholder="e.g., 23.5" required>
+
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
+                </select>
+
+                <label for="marital_status">Marital Status:</label>
+                <select id="marital_status" name="marital_status" required>
+                    <option value="0">Single</option>
+                    <option value="1">Married</option>
+                </select>
+
+                <label for="work_type">Work Type:</label>
+                <select id="work_type" name="work_type" required>
+                    <option value="0">Private</option>
+                    <option value="1">Self-employed</option>
+                    <option value="2">Govt_job</option>
+                    <option value="3">Children</option>
+                </select>
+
+                <label for="residence_type">Residence Type:</label>
+                <select id="residence_type" name="residence_type" required>
+                    <option value="0">Urban</option>
+                    <option value="1">Rural</option>
+                </select>
+
+                <label for="smoking_status">Smoking Status:</label>
+                <select id="smoking_status" name="smoking_status" required>
+                    <option value="0">Never smoked</option>
+                    <option value="1">Formerly smoked</option>
+                    <option value="2">Smokes</option>
+                </select>
+
+                <button type="submit">Predict Stroke Risk</button>
+            </form>
+
+            
+        </div>
+        {% if prediction_text %}
+            <div class="prediction-result">
+            <h3>{{ prediction_text }}</h3>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
